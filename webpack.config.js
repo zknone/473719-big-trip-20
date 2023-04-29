@@ -43,4 +43,8 @@ module.exports = {
       },
     ],
   },
+  "browserslist": [
+    "defaults and supports es6-module",
+    "maintained node versions"
+  ]
 };
