@@ -41,10 +41,6 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
       },
-    ],
-  },
-  "browserslist": [
-    "defaults and supports es6-module",
-    "maintained node versions"
-  ]
+    ]
+  }
 };
