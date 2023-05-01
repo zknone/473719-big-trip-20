@@ -20,7 +20,9 @@ class ListView extends View {
 
   createItemView() {
     const view = new CardView();
-
+    view.classList.add('trip-list__item');
+    view.setAttribute('role', 'listitem');
+    view.render();
     return view;
   }
 }
