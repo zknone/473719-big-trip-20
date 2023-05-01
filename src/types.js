@@ -9,3 +9,7 @@
 /**
  * @typedef {import('./views/add-view.js').default} AddView
  */
+
+/**
+ * @typedef {import('./views/filter-view.js').default} FilterView
+ */
