@@ -13,10 +13,13 @@ class EditorView extends View {
         ${this.createDestinationHtml()}
         ${this.createEditingTimeHtml()}
         ${this.createChoosingPriceHtml()}
-        ${this.createSaveButtonHtml()}
-        ${this.createCancelButtonHtml()}
+        ${this.createSubmitButtonHtml()}
+        ${this.createResetButtonHtml()}
+        ${this.createCloseRollupButtonHtml()}
         </header>
         <section class="event__details">
+        ${this.createOfferListHtml()}
+        ${this.createDescriptionSectionHtml()}
         </section>
       </form>
     `;
@@ -87,15 +90,68 @@ class EditorView extends View {
     `;
   }
 
-  createSaveButtonHtml() {
+  createSubmitButtonHtml() {
     return html`
-    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+      <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
     `;
   }
 
-  createCancelButtonHtml() {
+  createResetButtonHtml() {
     return html`
-    <button class="event__reset-btn" type="reset">Cancel</button>
+      <button class="event__reset-btn" type="reset">Delete</button>
+    `;
+  }
+
+  createCloseRollupButtonHtml() {
+    return html`
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Close event</span>
+      </button>
+    `;
+  }
+
+  createOfferListHtml() {
+    return html`
+      <section class="event__section  event__section--offers">
+      <h3 class="event__section-title  event__section-title--offers">Offers</h3>
+      <div class="event__available-offers">
+        <div class="event__offer-selector">
+        <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-luggage" checked="">
+        <label class="event__offer-label" for="event-offer-luggage-1">
+          <span class="event__offer-title">Add luggage</span>
+          +€&nbsp;
+          <span class="event__offer-price">50</span>
+        </label>
+        </div>
+        <div class="event__offer-selector">
+          <input class="event__offer-checkbox  visually-hidden" id="event-offer-train-1" type="checkbox" name="event-offer-train">
+          <label class="event__offer-label" for="event-offer-train-1">
+            <span class="event__offer-title">Travel by train</span>
+            +€&nbsp;
+            <span class="event__offer-price">40</span>
+          </label>
+        </div>
+      </div>
+    </section>
+    `;
+  }
+
+  createDescriptionSectionHtml() {
+    return html`
+      <section class="event__section  event__section--destination">
+      <h3 class="event__section-title  event__section-title--destination">Destination</h3>
+      <p class="event__destination-description">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+
+        <div class="event__photos-container">
+          <div class="event__photos-tape">
+            <img class="event__photo" src="img/photos/1.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/3.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
+            <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
+          </div>
+        </div>
+      </section>
     `;
   }
 }
