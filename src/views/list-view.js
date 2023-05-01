@@ -1,5 +1,6 @@
 import View from "./view.js";
 import CardView from "./card-view.js";
+import EditorView from './editor-view.js';
 
 class ListView extends View {
   constructor() {
@@ -18,8 +19,8 @@ class ListView extends View {
     this.replaceChildren(...views);
   }
 
-  createItemView() {
-    const view = new CardView();
+  createItemView(none, index) {
+    const view = (index === 0) ? new EditorView : new CardView();
     view.classList.add('trip-list__item');
     view.setAttribute('role', 'listitem');
     view.render();
