@@ -25,4 +25,8 @@ function html(strings, ...values) {
   return new SafeHtml(result);
 }
 
-export {SafeHtml, html};
+function getRandomArrayElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+export {SafeHtml, html, getRandomArrayElement};
