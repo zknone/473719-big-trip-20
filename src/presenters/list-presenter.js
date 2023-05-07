@@ -1,7 +1,7 @@
 import Presenter from './presenter.js';
 
 /**
- * @extends {Presenter<ListView>}
+ * @extends {Presenter<ListView>, AppModel}
  */
 class ListPresenter extends Presenter {
   /**

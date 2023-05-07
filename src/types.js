@@ -16,6 +16,29 @@
  */
 
 /**
+ * @typedef ListViewState
+ * @prop {Array<PointViewState>} items
+ */
+
+/**
+ * @typedef PointViewState
+ * @prop {string} id
+ * @prop {Array<{value: PointType, isSelected: boolean}>} types
+ * @prop {Array<Destination & {isSelected: boolean}>} destinations
+ * @prop {string} startDateTime
+ * @prop {string} endDateTime
+ * @prop {string} startDate
+ * @prop {string} startTime
+ * @prop {string} endTime
+ * @prop {string} duration
+ * @prop {number} basePrice
+ * @prop {Array<Offer & {isSelected: boolean}>} offers
+ * @prop {boolean} isFavorite
+ * @prop {boolean} isEditable
+ */
+
+
+/**
  * @typedef PointInSnakeCase
  * @prop {string} id
  * @prop {PointType} type
@@ -69,3 +92,5 @@
 /**
  * @typedef {'taxi' | 'bus' | 'train' | 'ship' | 'drive' | 'flight' | 'check-in' | 'sightseeing' | 'restaurant'} PointType
  */
+
+
