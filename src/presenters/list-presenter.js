@@ -1,4 +1,4 @@
-import Presenter from './presenter.js';
+import Presenter from "./presenter.js";
 
 /**
  * @extends {Presenter<ListView>, AppModel}
@@ -11,7 +11,7 @@ class ListPresenter extends Presenter {
   createViewState() {
     const points = this.model.getPoints();
     const items = points.map(this.createPointViewState, this);
-    return {items};
+    return { items };
   }
 
   /**
@@ -19,7 +19,41 @@ class ListPresenter extends Presenter {
    * @param {Point} point
    * @return {PointViewState}
    */
-  createPointViewState(point) {}
+  createPointViewState(point, index) {
+    const offerGroups = this.model.getOfferGroups();
+
+    const types = offerGroups.map((it) => ({
+      value: it.type,
+      isSelected: it.type === point.type,
+    }));
+
+    const destinations = this.model.getDestinations().map((it) => ({
+      ...it,
+      isSelected: it.id === point.destinationId,
+    }));
+
+    const group = offerGroups.find((it) => it.type === point.type);
+    const offers = group.offers.map((it) => ({
+      ...it,
+      isSelected: point.offerIds.includes(it.id)
+    }))
+
+    return {
+      id: point.id,
+      types,
+      destinations,
+      startDateTime: point.startDateTime,
+      endDateTime: point.endDateTime,
+      startDate: "",
+      startTime: "",
+      endTime: "",
+      duration: "",
+      basePrice: point.basePrice,
+      offers,
+      isFavorite: point.isFavorite,
+      isEditable: index === 0,
+    };
+  }
 }
 
 export default ListPresenter;
