@@ -1,3 +1,4 @@
+import {formatDate, formatDuration, formatTime} from '../utils.js';
 import Presenter from "./presenter.js";
 
 /**
@@ -36,7 +37,7 @@ class ListPresenter extends Presenter {
     const offers = group.offers.map((it) => ({
       ...it,
       isSelected: point.offerIds.includes(it.id)
-    }))
+    }));
 
     return {
       id: point.id,
@@ -44,10 +45,10 @@ class ListPresenter extends Presenter {
       destinations,
       startDateTime: point.startDateTime,
       endDateTime: point.endDateTime,
-      startDate: "",
-      startTime: "",
-      endTime: "",
-      duration: "",
+      startDate: formatDate(point.startDateTime),
+      startTime: formatTime(point.startDateTime),
+      endTime: formatTime(point.endDateTime),
+      duration: formatDuration(point.startDateTime, point.endDateTime),
       basePrice: point.basePrice,
       offers,
       isFavorite: point.isFavorite,
