@@ -2,6 +2,6 @@
  * @abstract
  */
 
-class BasicModel {}
+class Model {}
 
-export default BasicModel
+export default Model

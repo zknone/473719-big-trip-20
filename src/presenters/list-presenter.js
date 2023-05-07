@@ -6,10 +6,20 @@ import Presenter from './presenter.js';
 class ListPresenter extends Presenter {
   /**
    * @override
+   * @return {ListViewState}
    */
   createViewState() {
-    // TODO: ListViewState
+    const points = this.model.getPoints();
+    const items = points.map(this.createPointViewState, this);
+    return {items};
   }
+
+  /**
+   *
+   * @param {Point} point
+   * @return {PointViewState}
+   */
+  createPointViewState(point) {}
 }
 
 export default ListPresenter;

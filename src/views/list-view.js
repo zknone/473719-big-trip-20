@@ -2,6 +2,10 @@ import View from "./view.js";
 import CardView from "./card-view.js";
 import EditorView from './editor-view.js';
 
+/**
+ * @extends{View<ListViewState>}
+ */
+
 class ListView extends View {
   constructor() {
     super();
