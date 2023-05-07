@@ -7,11 +7,16 @@
  * @typedef {import('./views/list-view.js').default} ListView
  * @typedef {import('./views/card-view.js').default} CardView
  * @typedef {import('./views/editor-view.js').default} EditorView
+ * @typedef {import('./views/view.js').default} View
  */
 
+/**
+ * @typedef {import('./models/app-model.js').default} AppModel
+ * @typedef {import('./models/basic-model.js').default} BasicModel
+ */
 
 /**
- * @typedef Point
+ * @typedef PointInSnakeCase
  * @prop {string} id
  * @prop {PointType} type
  * @prop {string} destination
@@ -20,6 +25,18 @@
  * @prop {number} base_price
  * @prop {Array<string>} offers
  * @prop {boolean} is_favorite
+ */
+
+/**
+ * @typedef Point
+ * @prop {string} id
+ * @prop {PointType} type
+ * @prop {string} destinationId
+ * @prop {string} startDateTime
+ * @prop {string} endDateTime
+ * @prop {number} basePrice
+ * @prop {Array<string>} offerIds
+ * @prop {boolean} isFavorite
  */
 
 /**
