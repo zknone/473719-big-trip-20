@@ -1,6 +1,6 @@
 import View from './view.js';
 import {html} from '../utils.js';
-import './editor-view.css';
+// import './editor-view.css';
 
 /**
  * @extends {View<PointViewState>}
@@ -64,7 +64,6 @@ class EditorView extends View {
   createDestinationHtml() {
     const point = this.state;
     const destination = point.destinations.find((it) => it.isSelected);
-    const type = point.types.find((it) => it.isSelected);
 
     return html`
       <div class="event__field-group  event__field-group--destination">
