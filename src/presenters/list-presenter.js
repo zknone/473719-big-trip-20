@@ -52,7 +52,7 @@ class ListPresenter extends Presenter {
       basePrice: point.basePrice,
       offers,
       isFavorite: point.isFavorite,
-      isEditable: index === 0,
+      isEditable: index === 2,
     };
   }
 }
