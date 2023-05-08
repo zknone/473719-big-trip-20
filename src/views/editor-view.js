@@ -1,5 +1,6 @@
 import View from './view.js';
 import {html} from '../utils.js';
+import './editor-view.css';
 
 /**
  * @extends {View<PointViewState>}
