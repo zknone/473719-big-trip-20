@@ -29,7 +29,7 @@
  */
 
 /**
- * @typedef {'everything' | 'future' | 'present' | 'past'} FilterType
+ * @typedef {'everything' | 'future' | 'present' | 'past'}
  */
 
 /**

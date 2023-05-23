@@ -9,7 +9,6 @@ class SortPresenter extends Presenter {
    * @return {SortViewState}
    */
   createViewState() {
-    // TODO: SortViewState
     /**
      * @type {Array<SortType>}
      */

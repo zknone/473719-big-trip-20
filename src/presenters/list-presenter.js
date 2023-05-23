@@ -44,6 +44,7 @@ class ListPresenter extends Presenter {
      * @type {UrlParams}
      */
     const urlParams = this.getUrlParams();
+
     return {
       id: point.id,
       types,
@@ -67,8 +68,9 @@ class ListPresenter extends Presenter {
 
   addEventListeners() {
     /**
-     * @param {CustomEven & {target: CardView}} event
+     * @param {CustomEvent & {target: CardView}} event
      */
+
     const handleViewOpen = (event) => {
       /**
        * @type {UrlParams}
