@@ -4,23 +4,27 @@ import offerGroups from "../data/offers.json";
 import points from "../data/points.json";
 
 class AppModel extends Model {
-  #points;
-  #destinations;
-  #offerGroups;
+  #points = points;
+  #destinations = destinations;
+  #offerGroups = offerGroups;
 
-  constructor() {
-    super();
+  /**
+   * @type {Record<SorType, (a : Point, b: Point) => number>}
+   */
 
-    this.#points = points;
-    this.#offerGroups = offerGroups;
-    this.#destinations = destinations;
+  #sortCallbackMap = {
+    day : () => 0,
+    event: () => 0,
+    time: () => 0,
+    price: () => 0,
+    offers: () => 0
   }
 
   /**
    * @return {Array<Point>}
    */
 
-  getPoints() {
+  getPoints(cretiria) {
     return this.#points.map(AppModel.adaptPointForClient);
   }
 
