@@ -13,19 +13,23 @@ class AppModel extends Model {
    */
 
   #sortCallbackMap = {
-    day : () => 0,
+    day: (a, b) => Date.parse(a.startDateTime) - Date.parse(b.startDateTime),
     event: () => 0,
-    time: () => 0,
-    price: () => 0,
-    offers: () => 0
-  }
+    time: (a, b) => AppModel.calcPointDuration(b) - AppModel.calcPointDuration(a),
+    price: (a, b) => a.basePrice - b.basePrice,
+    offers: () => 0,
+  };
 
   /**
+   * @param {{sort ?: SortType}} criteria
    * @return {Array<Point>}
    */
 
-  getPoints(cretiria) {
-    return this.#points.map(AppModel.adaptPointForClient);
+  getPoints(criteria = {}) {
+    const adaptedPoints = this.#points.map(AppModel.adaptPointForClient);
+    const sortCallback =
+      this.#sortCallbackMap[criteria.sort] ?? this.#sortCallbackMap.day;
+    return adaptedPoints.sort(sortCallback);
   }
 
   /**
@@ -42,6 +46,15 @@ class AppModel extends Model {
 
   getOfferGroups() {
     return structuredClone(this.#offerGroups);
+  }
+
+  /**
+   *@param {Point} point
+   @return {number}
+   */
+
+  static calcPointDuration(point) {
+    return Date.parse(point.endDateTime) - Date.parse(point.starDateTime);
   }
 
   /**

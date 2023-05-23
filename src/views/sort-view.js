@@ -8,7 +8,6 @@ import {html} from '../utils.js';
 class SortView extends View {
   constructor() {
     super();
-
     this.classList.add('trip-sort');
   }
 

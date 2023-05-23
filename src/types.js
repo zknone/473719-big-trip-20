@@ -85,6 +85,7 @@
 /**
  * @typedef UrlParams
  * @prop {string} [edit]
+ * @prop {SortType} [sort]
  *
  *
  */
