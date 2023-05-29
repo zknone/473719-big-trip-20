@@ -147,6 +147,7 @@ class ListPresenter extends Presenter {
       case "event-type": {
         const offerGroups = this.model.getOfferGroups();
         const { offers } = offerGroups.find((it) => it.type === field.value);
+
         point.offers = offers;
         point.types.forEach((it) => {
           it.isSelected = it.value === field.value;

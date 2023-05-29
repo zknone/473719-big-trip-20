@@ -1,6 +1,8 @@
-import {escape as escapeHtml} from 'he';
-import dayjs, {duration} from 'dayjs';
-import durationPlugin from 'dayjs/plugin/duration.js';
+import { escape as escapeHtml } from "he";
+import dayjs, { duration } from "dayjs";
+import durationPlugin from "dayjs/plugin/duration.js";
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.css";
 
 dayjs.extend(durationPlugin);
 
@@ -10,7 +12,7 @@ dayjs.extend(durationPlugin);
  */
 
 function formatDate(dateTime) {
-  return dayjs(dateTime).format('MMM D');
+  return dayjs(dateTime).format("MMM D");
 }
 
 /**
@@ -19,7 +21,7 @@ function formatDate(dateTime) {
  */
 
 function formatTime(dateTime) {
-  return dayjs(dateTime).format('HH: mm');
+  return dayjs(dateTime).format("HH: mm");
 }
 
 /**
@@ -33,14 +35,50 @@ function formatDuration(startDateTime, endDateTime) {
   const duration = dayjs.duration(ms);
 
   if (duration.days()) {
-    return duration.format('DD[d] HH[h] mm[m]');
+    return duration.format("DD[d] HH[h] mm[m]");
   }
 
   if (duration.hours()) {
-    return duration.format('HH[h] mm[m]');
+    return duration.format("HH[h] mm[m]");
   }
 
-  return duration.format('mm[m]');
+  return duration.format("mm[m]");
+}
+
+/**
+ *
+ * @param {HTMLInputElement} startDateField
+ * @param {HTMLInputElement} endDateField
+ * @return {() => void}
+ */
+
+function createDatePickers(startDateField, endDateField) {
+  /**
+   * @type {FlatpickrOptions}
+   */
+
+  const options = {
+    monthSelectorType: "static",
+    dateFormat: "Z",
+    altInput: true,
+    altFormat: "d/m/y H:i",
+    locale: { firstDayOfWeek: 1 },
+    enableTime: true,
+    time_24hr: true,
+  };
+
+  const startDatePicker = flatpickr(startDateField, options);
+  const endDatePicker = flatpickr(endDateField, options);
+
+  startDatePicker.set("onChange", (dates) => {
+    endDatePicker.set("minDate", dates.at(0));
+  });
+  endDatePicker.set('minDate', startDatePicker.selectedDates.at(0));
+
+  return () => {
+    startDatePicker.destroy();
+    endDatePicker.destroy();
+  };
 }
 
 class SafeHtml extends String {}
@@ -59,7 +97,7 @@ function html(strings, ...values) {
     }
 
     if (Array.isArray(value) && value.every((it) => it instanceof SafeHtml)) {
-      return before + value.join('') + after;
+      return before + value.join("") + after;
     }
 
     if (!(value instanceof SafeHtml)) {
@@ -76,4 +114,12 @@ function getRandomArrayElement(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-export {formatDate, formatDuration ,formatTime, SafeHtml, html, getRandomArrayElement};
+export {
+  formatDate,
+  formatDuration,
+  formatTime,
+  SafeHtml,
+  html,
+  getRandomArrayElement,
+  createDatePickers,
+};
