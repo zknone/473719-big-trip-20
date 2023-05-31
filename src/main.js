@@ -21,4 +21,4 @@ new AddPresenter(document.querySelector('add-view'));
 new FilterPresenter(document.querySelector('filter-view'));
 new ListPresenter(document.querySelector('list-view'), appModel);
 new SortPresenter(document.querySelector('sort-view'));
-new PlaceholderPresenter(document.querySelector('placeholder-view'));
+new PlaceholderPresenter(document.querySelector('placeholder-view'), appModel);
