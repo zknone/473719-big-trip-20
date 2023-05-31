@@ -1,10 +1,10 @@
-import PlaceholderView from '../views/placeholder-view.js';
 import Presenter from './presenter.js';
 
 /**
  * @extends {Presenter<PlaceholderView, AppModel>}
  */
 class PlaceholderPresenter extends Presenter {
+
   /**
    *@type {Record<FilterType, string>}
    */
