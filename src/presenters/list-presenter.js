@@ -80,7 +80,7 @@ class ListPresenter extends Presenter {
       startDateTime: point.startDateTime,
       endDateTime: point.endDateTime,
       basePrice: point.basePrice,
-      offerIds: point.offers.filter((it) => it.isSelected).map((it)=> it.id),
+      offerIds: point.offers.filter((it) => it.isSelected).map((it) => it.id),
       isFavorite: point.isFavorite,
     };
   }
@@ -95,6 +95,7 @@ class ListPresenter extends Presenter {
     this.view.addEventListener('favorite', this.handleViewFavorite.bind(this));
     this.view.addEventListener('edit', this.handleViewEdit.bind(this));
     this.view.addEventListener('save', this.handleViewSave.bind(this));
+    this.view.addEventListener('delete', this.handleViewDelete.bind(this));
   }
 
   /**
@@ -196,6 +197,18 @@ class ListPresenter extends Presenter {
 
     event.preventDefault();
     this.model.updatePoint(this.serializePointViewState(point));
+    this.handleViewClose();
+  }
+
+  /**
+   * @param {CustomEvent & {target: EditorView}} event
+   */
+  handleViewDelete(event) {
+    const editor = event.target;
+    const point = editor.state;
+
+    event.preventDefault();
+    this.model.deletePoint(point.id);
     this.handleViewClose();
   }
 }
