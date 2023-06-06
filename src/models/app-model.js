@@ -7,6 +7,7 @@ class AppModel extends Model {
   #points = points;
   #destinations = destinations;
   #offerGroups = offerGroups;
+  #apiService;
 
   /**
    * @type {Record<FilterType, (it: Point) => boolean>}
@@ -32,6 +33,27 @@ class AppModel extends Model {
     price: (a, b) => a.basePrice - b.basePrice,
     offers: () => 0,
   };
+
+  /**
+   *
+   * @param {ApiService} apiService
+   */
+  constructor(apiService) {
+    super();
+    this.#apiService = apiService;
+  }
+
+  /**
+   * @return {Promise<void>}
+   */
+  async load() {
+    const data = await Promise.all ([
+      this.#apiService.getPoints(),
+      this.#apiService.getDestinations(),
+      this.#apiService.getOfferGroups(),
+    ]);
+    return data;
+  }
 
   /**
    * @param {{filter?: FilterType, sort ?: SortType}} criteria
