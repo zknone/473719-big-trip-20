@@ -69,10 +69,10 @@ class AppModel extends Model {
 
       this.notify('load');
 
-    } catch(error) {
+    } catch (error) {
       this.notify('error', error);
       throw error;
-    };
+    }
   }
 
   /**
@@ -175,11 +175,11 @@ class AppModel extends Model {
       id: point.id,
       type: point.type,
       destination: point.destinationId,
-      date_from: point.startDateTime,
-      date_to: point.endDateTime,
-      base_price: point.basePrice,
+      'date_from': point.startDateTime,
+      'date_to': point.endDateTime,
+      'base_price': point.basePrice,
       offers: point.offerIds,
-      is_favorite: point.isFavorite,
+      'is_favorite': point.isFavorite,
     };
   }
 }

@@ -15,7 +15,7 @@ import ListPresenter from './presenters/list-presenter.js';
 import SortPresenter from './presenters/sort-presenter.js';
 import PlaceholderPresenter from './presenters/placeholder-presenter.js';
 
-const apiService = new ApiService({ authorization: 'Basic 122faasda233'});
+const apiService = new ApiService({ authorization: 'Basic 122faasda233' });
 const appModel = new AppModel(apiService);
 
 new PlaceholderPresenter(document.querySelector('placeholder-view'), appModel);
@@ -27,4 +27,3 @@ appModel.load().then(() => {
   new ListPresenter(document.querySelector('list-view'), appModel);
   new SortPresenter(document.querySelector('sort-view'));
 });
-
