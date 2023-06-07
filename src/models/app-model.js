@@ -1,12 +1,20 @@
 import Model from './basic-model';
-import destinations from '../data/destinations.json';
-import offerGroups from '../data/offers.json';
-import points from '../data/points.json';
 
 class AppModel extends Model {
-  #points = points;
-  #destinations = destinations;
-  #offerGroups = offerGroups;
+  /**
+   * @type {Array<PointInSnakeCase>}
+   */
+  #points;
+
+  /**
+   * @type {Array<Destination>}
+   */
+  #destinations;
+
+  /**
+   * @type {Array<OfferGroup>}
+   */
+  #offerGroups;
   #apiService;
 
   /**
@@ -47,12 +55,24 @@ class AppModel extends Model {
    * @return {Promise<void>}
    */
   async load() {
-    const data = await Promise.all ([
-      this.#apiService.getPoints(),
-      this.#apiService.getDestinations(),
-      this.#apiService.getOfferGroups(),
-    ]);
-    return data;
+    try {
+      const data = await Promise.all([
+        this.#apiService.getPoints(),
+        this.#apiService.getDestinations(),
+        this.#apiService.getOfferGroups(),
+      ]);
+
+      const [points, destinations, offerGroups] = data;
+      this.#points = points;
+      this.#destinations = destinations;
+      this.#offerGroups = offerGroups;
+
+      this.notify('load');
+
+    } catch(error) {
+      this.notify('error', error);
+      throw error;
+    };
   }
 
   /**
@@ -155,11 +175,11 @@ class AppModel extends Model {
       id: point.id,
       type: point.type,
       destination: point.destinationId,
-      'date_from': point.startDateTime,
-      'date_to': point.endDateTime,
-      'base_price': point.basePrice,
+      date_from: point.startDateTime,
+      date_to: point.endDateTime,
+      base_price: point.basePrice,
       offers: point.offerIds,
-      'is_favorite': point.isFavorite,
+      is_favorite: point.isFavorite,
     };
   }
 }
