@@ -18,6 +18,7 @@ import PlaceholderPresenter from './presenters/placeholder-presenter.js';
 import OverlayPresenter from './presenters/overlay-presenter.js';
 
 const apiService = new ApiService({ authorization: 'Basic 122faasda233' });
+
 const appModel = new AppModel(apiService);
 
 new PlaceholderPresenter(document.querySelector('placeholder-view'), appModel);
