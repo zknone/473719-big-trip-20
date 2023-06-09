@@ -23,7 +23,7 @@
   height: 65px;
 }
 
-.overlay--on {
+.overlay--active {
   display: grid;
 }
 

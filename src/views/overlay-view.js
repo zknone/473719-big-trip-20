@@ -1,7 +1,10 @@
 import './overlay-view.css';
-
 import View from './view.js';
-import {html} from '../utils.js';
+
+/**
+ * @extends {View<OverlayViewState>}
+ * @implements {EventListenerObject}
+ */
 
 class OverlayView extends View {
   constructor() {
@@ -13,10 +16,24 @@ class OverlayView extends View {
   /**
    * @override
    */
-  createHtml() {
-    return html`
 
-    `;
+  render() {
+    const overlay = this.state;
+    if(overlay.isActive) {
+      this.classList.add('overlay--active');
+      document.addEventListener('keydown', this.handleEvent);
+    } else {
+      this.classList.remove('overlay--active');
+      document.removeEventListener('keydown', this.handleEvent);
+    }
+  }
+
+  /**
+   *
+   * @param {KeyboardEvent} event
+   */
+  handleEvent(event) {
+    event.preventDefault();
   }
 }
 

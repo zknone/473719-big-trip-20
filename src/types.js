@@ -9,6 +9,7 @@
  * @typedef {import('./views/editor-view.js').default} EditorView
  * @typedef {import('./views/view.js').default} View
  * @typedef {import('./views/placeholder-view.js').default} PlaceholderView
+ * @typedef {import('./views/overlay-view.js').default} OverlayView
  */
 
 /**
@@ -107,6 +108,11 @@
  * @typedef PlaceholderViewState
  * @prop {string} text
  * @prop {boolean} [isHidden]
+ */
+
+/**
+ * @typedef OverviewViewState
+ * @prop {boolean} isActive
  */
 
 /**
