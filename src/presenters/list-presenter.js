@@ -156,6 +156,7 @@ class ListPresenter extends Presenter {
 
     } catch (error) {
       card.shake();
+      console.log(error);
     }
   }
 
