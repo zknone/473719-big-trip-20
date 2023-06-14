@@ -69,7 +69,7 @@ class PlaceholderPresenter extends Presenter {
 
   /**
    *
-   * @param {CustomEvent<error>} event
+   * @param {CustomEvent<Error>} event
    */
   handleModelError(event) {
     this.modelError = event.detail;

@@ -1,7 +1,7 @@
 /**
  * @abstract
  * @template {View} V
- * @template {Model} M
+ * @template {BasicModel} M
  */
 class Presenter {
   /**

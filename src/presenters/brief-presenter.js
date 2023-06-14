@@ -9,7 +9,6 @@ class BriefPresenter extends Presenter {
    * @return {BriefViewState}
    */
   createViewState() {
-    // TODO: make it dinamicaly
     return {
       places:'Amsterdam — Chamonix — Geneva',
       dates: 'Mar 18 — 20',
