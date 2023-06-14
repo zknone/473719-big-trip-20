@@ -9,10 +9,24 @@
  * @typedef {import('./views/editor-view.js').default} EditorView
  * @typedef {import('./views/view.js').default} View
  * @typedef {import('./views/placeholder-view.js').default} PlaceholderView
+ * @typedef {import('./views/overlay-view.js').default} OverlayView
  */
 
 /**
  * @typedef {import('flatpickr/dist/types/options.js').Options} FlatpickrOptions
+ */
+
+
+/**
+ * @typedef {import('./services/api-service.js').default} ApiService
+ * @typedef {import('./services/service.js').default} Service
+ */
+
+/**
+ * @typedef ServiceOptions
+ * @prop {string} baseUrl
+ * @prop {number} minResponseTime
+ * @prop {string} authorization
  */
 
 /**
@@ -86,12 +100,19 @@
  * @prop {boolean} isFavorite
  * @prop {boolean} isEditable
  * @prop {boolean} isDraft
+ * @prop {boolean} [isSaving]
+ * @prop {boolean} [isDeleting]
  */
 
 /**
  * @typedef PlaceholderViewState
  * @prop {string} text
- * @prop {boolean} isHidden
+ * @prop {boolean} [isHidden]
+ */
+
+/**
+ * @typedef OverviewViewState
+ * @prop {boolean} isActive
  */
 
 /**

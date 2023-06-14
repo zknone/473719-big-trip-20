@@ -1,12 +1,21 @@
 import Model from './basic-model';
-import destinations from '../data/destinations.json';
-import offerGroups from '../data/offers.json';
-import points from '../data/points.json';
 
 class AppModel extends Model {
-  #points = points;
-  #destinations = destinations;
-  #offerGroups = offerGroups;
+  /**
+   * @type {Array<PointInSnakeCase>}
+   */
+  #points;
+
+  /**
+   * @type {Array<Destination>}
+   */
+  #destinations;
+
+  /**
+   * @type {Array<OfferGroup>}
+   */
+  #offerGroups;
+  #apiService;
 
   /**
    * @type {Record<FilterType, (it: Point) => boolean>}
@@ -34,6 +43,39 @@ class AppModel extends Model {
   };
 
   /**
+   *
+   * @param {ApiService} apiService
+   */
+  constructor(apiService) {
+    super();
+    this.#apiService = apiService;
+  }
+
+  /**
+   * @return {Promise<void>}
+   */
+  async load() {
+    try {
+      const data = await Promise.all([
+        this.#apiService.getPoints(),
+        this.#apiService.getDestinations(),
+        this.#apiService.getOfferGroups(),
+      ]);
+
+      const [points, destinations, offerGroups] = data;
+      this.#points = points;
+      this.#destinations = destinations;
+      this.#offerGroups = offerGroups;
+
+      this.notify('load');
+
+    } catch (error) {
+      this.notify('error', error);
+      throw error;
+    }
+  }
+
+  /**
    * @param {{filter?: FilterType, sort ?: SortType}} criteria
    * @return {Array<Point>}
    */
@@ -54,21 +96,37 @@ class AppModel extends Model {
    * @param {Point} point
    */
 
-  addPoint(point) {
-    const adaptedPoint = AppModel.adaptPointForServer(point);
-    adaptedPoint.id = crypto.randomUUID();
-    this.#points.push(adaptedPoint);
-  }
+  async addPoint(point) {
+    try {
+      this.notify('busy');
 
+      const adaptedPoint = AppModel.adaptPointForServer(point);
+      const addedPoint = await this.#apiService.addPoint(adaptedPoint);
+
+      this.#points.push(addedPoint);
+
+    } finally {
+      this.notify('idle');
+    }
+  }
   /**
    *
    * @param {Point} point
    */
 
-  updatePoint(point) {
-    const adaptedPoint = AppModel.adaptPointForServer(point);
-    const index = this.#points.findIndex((it) => it.id === point.id);
-    this.#points.splice(index, 1, adaptedPoint);
+  async updatePoint(point) {
+    try {
+      this.notify('busy');
+
+      const adaptedPoint = AppModel.adaptPointForServer(point);
+      const updatedPoint = await this.#apiService.updatePoint(adaptedPoint);
+      const index = this.#points.findIndex((it) => it.id === adaptedPoint.id);
+
+      this.#points.splice(index, 1, updatedPoint);
+
+    } finally {
+      this.notify('idle');
+    }
   }
 
   /**
@@ -76,9 +134,18 @@ class AppModel extends Model {
    * @param {string} id
    */
 
-  deletePoint(id) {
-    const index = this.#points.findIndex((it) => it.id === id);
-    this.#points.splice(index, 1);
+  async deletePoint(id) {
+    try {
+      this.notify('busy');
+
+      await this.#apiService.deletePoint(id);
+      const index = this.#points.findIndex((it) => it.id === id);
+
+      this.#points.splice(index, 1);
+
+    } finally {
+      this.notify('idle');
+    }
   }
 
   /**
