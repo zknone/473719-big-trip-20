@@ -39,7 +39,7 @@
  * @typedef BriefViewState
  * @prop {string} places
  * @prop {string} dates
- * @prop {string} cost
+ * @prop {number} cost
  */
 
 /**
