@@ -14,7 +14,11 @@ class Presenter {
 
     this.addEventListeners();
     window.queueMicrotask(()=> this.updateView());
-    window.addEventListener('popstate', () => this.updateView());
+    window.addEventListener('popstate', this.handleViewPopState.bind(this));
+  }
+
+  handleViewPopState() {
+    this.updateView();
   }
 
   updateView() {
