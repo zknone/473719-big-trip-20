@@ -131,8 +131,8 @@ function html(strings, ...values) {
   return new SafeHtml(result);
 }
 
-function getRandomArrayElement(array) {
-  return array[Math.floor(Math.random() * array.length)];
+function getRandomArrayElement(elements) {
+  return elements[Math.floor(Math.random() * array.length)];
 }
 
 export {
