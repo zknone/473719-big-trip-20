@@ -131,10 +131,6 @@ function html(strings, ...values) {
   return new SafeHtml(result);
 }
 
-function getRandomArrayElement(elements) {
-  return elements[Math.floor(Math.random() * array.length)];
-}
-
 export {
   formatDate,
   formatDateRange,
@@ -142,6 +138,5 @@ export {
   formatTime,
   SafeHtml,
   html,
-  getRandomArrayElement,
   createDatePickers,
 };
