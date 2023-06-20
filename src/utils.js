@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import durationPlugin from 'dayjs/plugin/duration.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.css';
-
 import { escape as escapeHtml } from 'he';
 import SafeHtml from './safe-html';
 
