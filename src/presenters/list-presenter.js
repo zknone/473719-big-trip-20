@@ -35,7 +35,7 @@ class ListPresenter extends Presenter {
 
   /**
    *
-   * @param {Point} point
+   * @param {Partial<Point>} point
    * @return {PointViewState}
    */
   createPointViewState(point) {

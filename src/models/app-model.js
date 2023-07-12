@@ -160,7 +160,7 @@ class AppModel extends Model {
   }
 
   /**
-   * @return {Array<Offer>}
+   * @return {Array<OfferGroup>}
    */
 
   getOfferGroups() {
